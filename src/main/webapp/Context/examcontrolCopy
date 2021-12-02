@@ -1,0 +1,383 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+
+import dal.ExamDal;
+import modal.ExamModal;
+import modal.StuAtndExam;
+
+/**
+ * Servlet implementation class StudExam
+ */
+@WebServlet("/Exam")
+public class Exam extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+        
+    public Exam() {
+        super();
+
+    }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 	response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ExamDal exmdal=new ExamDal();
+		//===================Session=========================
+		
+				HttpSession session=request.getSession();
+				int ExmEAID=0,ExmEID=0,ExmSID=0, ExmCLASSID=0,ExmSUBID=0,SN=1;
+				if(false) {
+					ExmEAID=Integer.valueOf(String.valueOf(session.getAttribute("ExmEAID")));
+					ExmEID=Integer.valueOf(String.valueOf(session.getAttribute("ExmEID")));
+				  ExmSID =Integer.valueOf(String.valueOf(session.getAttribute("SID")));
+				  ExmCLASSID=Integer.valueOf(String.valueOf(session.getAttribute("ExmCLASSID")));
+				  ExmSUBID=Integer.valueOf(String.valueOf(session.getAttribute("ExmSUBID")));
+				  SN=Integer.valueOf(String.valueOf(session.getAttribute("SN")));
+	}
+				response.setContentType("text/html");				
+				PrintWriter out=response.getWriter();
+				//out.print("<%@ page language='Java' contentType='text/html; charset=ISO-8859-1' pageEncoding='ISO-8859-1' %> ");
+				out.print("<!DOCTYPE html> ");
+				out.print("<html>");
+				out.print("<head> ");
+				out.print("<meta charset='ISO-8859-1'>"); 
+				out.print("<title>Insert title here</title>");
+				out.print("<link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/Context/css/ExamStyle.css\"> ");
+				out.print("<script  type=\"text/javascript\" src=\"${pageContext.request.contextPath}/js/jquery-3.0.0.min.js\"></script>");
+				out.print("</head>");
+				out.print("<body>");
+				out.print("<div id=\"timer_div\" style=\"font-size:40px; margin-top:50px; margin-right:30px;\">");
+				out.print ("</div>");
+				out.print ("<div class=\"details\" >");
+				
+				out.print("<p><b> Name:&nbsp&nbsp  Yashashri Ramakant Chafekar.</b></p>"); //session
+				
+				out.print("<p><b>Student ID:&nbsp&nbsp  202166.</b></p>"); //session
+				
+				out.print("<p><b> class:&nbsp&nbsp MCA II.</b></p>"); //sesion
+				
+				out.print("<p><b>Subject:&nbsp&nbsp  Java.</b></p>");//sesion
+				
+				out.print("</div>");
+				out.print("<hr>");
+				out.print("<input type=\"hidden\" name=\"SN\" id=\"SN\" value=\"1\" />");//sesion
+				
+				out.print("<input type=\"hidden\" name=\"QueID\" id=\"QueID\" value=\"1\" />");//sesion
+				
+				out.print("<input type=\"hidden\" name=\"SID\" id=\"SID\" value=\"1\"/> ");//sesion
+				
+				out.print("<input type=\"hidden\" name=\"EAID\" id=\"EAID\" value=\"1\"/>");//sesion
+				
+				out.print("<input type=\"hidden\" name=\"ClassId\" id=\"ClassId\" value=\"1\"/>\r\n"+ "");//session
+				
+				out.print("<div class=\"Q\"> ");
+				out.print("<p> 1.What is your name?</p>");
+				out.print(" </div>");
+				out.print(" <br> ");
+				//if("A") //this condition if answer 'A' is selected
+				out.print("<div class=\"A\"> ");
+				out.print("<label class=\"radio\">");
+				out.print ("<input type=\"radio\" value=\"A\" name=\"option\" checked> A) : Yash.");
+				out.print("</label> <br> <br> <br> " );
+				out.print("<label class=\"radio\"> " );
+				out.print("<input type=\"radio\" value=\"B\" name=\"option\"> B) : Yashu." );
+				out.print("</label>  <br> <br> <br> ");
+				out.print(" <label class=\"radio\"> ");
+				out.print("<input type=\"radio\" value=\"C\" name=\"option\"> C) : Maauu. ");
+				out.print("</label>  <br> <br> <br>");
+				out.print("<label class=\"radio\">" );
+				out.print("<input type=\"radio\" value=\"D\" name=\"option\"> D) : Yashashri. ");
+				//Upto
+				
+				//if("B") //this condition if answer 'B' is selected
+				out.print("<div class=\"A\"> ");
+				out.print("<label class=\"radio\">");
+				out.print ("<input type=\"radio\" value=\"A\" name=\"option\" checked> A) : Yash.");
+				out.print("</label> <br> <br> <br> " );
+				out.print("<label class=\"radio\"> " );
+				out.print("<input type=\"radio\" value=\"B\" name=\"option\"> B) : Yashu." );
+				out.print("</label>  <br> <br> <br> ");
+				out.print(" <label class=\"radio\"> ");
+				out.print("<input type=\"radio\" value=\"C\" name=\"option\"> C) : Maauu. ");
+				out.print("</label>  <br> <br> <br>");
+				out.print("<label class=\"radio\">" );
+				out.print("<input type=\"radio\" value=\"D\" name=\"option\"> D) : Yashashri. ");
+				//Upto
+				
+				//if("C") //this condition if answer 'C' is selected
+				out.print("<div class=\"A\"> ");
+				out.print("<label class=\"radio\">");
+				out.print ("<input type=\"radio\" value=\"A\" name=\"option\" checked> A) : Yash.");
+				out.print("</label> <br> <br> <br> " );
+				out.print("<label class=\"radio\"> " );
+				out.print("<input type=\"radio\" value=\"B\" name=\"option\"> B) : Yashu." );
+				out.print("</label>  <br> <br> <br> ");
+				out.print(" <label class=\"radio\"> ");
+				out.print("<input type=\"radio\" value=\"C\" name=\"option\"> C) : Maauu. ");
+				out.print("</label>  <br> <br> <br>");
+				out.print("<label class=\"radio\">" );
+				out.print("<input type=\"radio\" value=\"D\" name=\"option\"> D) : Yashashri. ");
+				//Upto
+				
+				//if("D") //this condition if answer 'D' is selected
+				out.print("<div class=\"A\"> ");
+				out.print("<label class=\"radio\">");
+				out.print ("<input type=\"radio\" value=\"A\" name=\"option\" checked> A) : Yash.");
+				out.print("</label> <br> <br> <br> " );
+				out.print("<label class=\"radio\"> " );
+				out.print("<input type=\"radio\" value=\"B\" name=\"option\"> B) : Yashu." );
+				out.print("</label>  <br> <br> <br> ");
+				out.print(" <label class=\"radio\"> ");
+				out.print("<input type=\"radio\" value=\"C\" name=\"option\"> C) : Maauu. ");
+				out.print("</label>  <br> <br> <br>");
+				out.print("<label class=\"radio\">" );
+				out.print("<input type=\"radio\" value=\"D\" name=\"option\"> D) : Yashashri. ");
+				//Upto
+				
+				out.print("</label>");
+				out.print("</div>");
+				out.print(" <div class=\"But\">");
+				out.print("<table width=\"100%\"> " );
+				out.print("<tr> " );
+				out.print("<td width=\"40%\">" );
+				out.print("<form action=\"<%=request.getContextPath()%>/Exam?action=prev\" method=\"post\">" );
+				out.print("<input type=\"button\" class=\"P\" value=\"Pre\" name=\"submit\" style=\"width:90px; height:40px; font-size:20px;  border-radius:6px;\" />" );
+				out.print("</form>" );
+				out.print("</td>" );
+				out.print(" <td width=\"20%\">" );
+				out.print("<form action=\"<%=request.getContextPath()%>/Exam?action=next\" method=\"post\">" );
+				out.print("<input type=\"button\" class=\"N\" value=\"Next\" name=\"submit\" style=\"width:90px; height:40px;  font-size:20px; border-radius:6px;\"/>" );
+				out.print("</form> " );
+				out.print("</td>" );
+				out.print(" <td width=\"50%\">" );
+				out.print("<form action=\"#popup1\">   " );
+				out.print("<input type=\"submit\" class=\"S\" value=\" Submit \" name=\"submit\" style=\"width:90px; height:40px;font-size:20px;  border-radius:6px;\"/>" );
+				out.print("</form>" );
+				out.print("</td>" );
+				out.print("</table>" );
+				out.print("</div>" );
+				out.print("<div id=\"popup1\" class=\"overlay\">");
+				out.print("<div class=\"popup\">");
+				out.print("<a class=\"close\" href=\"#\">&times;</a>" );
+				out.print("<div class=\"content\">");
+				out.print("Are you sure to submit your exam? Then Click yes.. <br> <br>\r\n"+ "	<br> ");
+				out.print("<div style=\"align: center;\">");
+				out.print("<table style=\"width: 90%; align: center;\"> ");
+				out.print(" <tr>\r\n"+ "<td style=\"align: center;\">");
+				out.print("<form action=\"<%=request.getContextPath()%>/Exam?action=Submit\" method=\"post\"> ");
+				out.print(" <input id=\"YesSubmit\" type=\"submit\" name=\"YesSubmit\"\r\n"+ "value=\"Yes\" style=\"font-size: 14px; width: 100px; height: 30px; border-radius: 8px; background-color: orange;\" /></form></td>");
+				out.print("<td style=\"align: center;\"><input id=\"YesSubmit\"\r\n"+ "	type=\"submit\" name=\"YesSubmit\" value=\"No\"\r\n"+ "	style=\"font-size: 14px; width: 100px; height: 30px; border-radius: 8px;\" />\r\n"+ "</td> ");
+				out.print("</td>\r\n"+ "</tr>\r\n"+ "</table>\r\n"+ "</div>\r\n"+ "	</div>\r\n"+ "</div>\r\n"+ "</div> ");
+				out.print(" <script type=\"text/javascript\">");
+				out.print("$(document).ready(function(){	\r\n"+ "	$('input:radio[name=\"option\"]').change(function(){ var AnsVal = $(this).val(); var sidVal=$(\"#SID\").val(); var QueidVal=$(\"#QueID\").val(); var SNVal=$(\"#SN\").val(); var EAIDVal=$(\"#EAID\").val(); var ClassIDVal=$(\"#ClassId\").val(); "
+						+ "var parseAnsData={action:\"updateAnswer\",EAID:EAIDVal,CLASSID:ClassIDVal,SID:sidVal,ANSWER:AnsVal,QID:QueidVal,SN:SNVal};");
+				out.print(" $.ajax({\r\n"
+						+ "		url:'${pageContext.request.contextPath}/Exam',\r\n"
+						+ "		type:'POST',\r\n"
+						+ "			data:parseAnsData,\r\n"
+						+ "   		success: function (Result) {\r\n"
+						+ "	   	console.log(\"Answer Updated Successfully..\"+Result+\"Ques ID:-\"+QueidVal);\r\n"
+						+ "     		\r\n"
+						+ "	    	 		document.getElementById(\"alert\").innerHTML=\"Question No. \"+ QueidVal +\" Answer Saved.\";  \r\n"
+						+ "	          \r\n"
+						+ "       	},   ");
+				out.print(" error: function (Resl) {  \r\n"
+						+ "   			 document.getElementById(\"alert\").innerHTML=\"Question No. \"+ QueidVal +\" Answer Not Saved Saved. Check Network and Restart Exam\";  \r\n"
+						+ "    		 console.log(Resl);\r\n"
+						+ "   }\r\n"
+						+ "});\r\n"
+						+ "});\r\n"
+						+ "}); ");
+				out.print(" function  UpdateRemainigTime(mints) {  ");
+				out.print(" {\r\n"
+						+ "	//var  AnsVal = $(this).val();\r\n"
+						+ "	var sidVal=$(\"#SID\").val();\r\n"
+						+ "	var QueidVal=$(\"#QueID\").val();\r\n"
+						+ "	var SNVal=$(\"#SN\").val();\r\n"
+						+ "	var	EAIDVal=$(\"#EAID\").val();\r\n"
+						+ "	var ClassIDVal=$(\"#ClassId\").val();\r\n"
+						+ " 	var  RemainTimeVal = mints;\r\n"
+						+ " 	var parseData={action:\"updateRemainigTime\",SID:sidVal,RemainTime:RemainTimeVal,EAID:EAIDVal,CLASSID:ClassIDVal}; ");
+				out.print(" $.ajax({\r\n"
+						+ "		url:'${pageContext.request.contextPath}/Exam',\r\n"
+						+ "		type:'POST',\r\n"
+						+ "			data: parseData,\r\n"
+						+ "   			success: function (Result) {\r\n"
+						+ "   				console.log(Result+\"Time Updated Time:-\"+RemainTimeVal);\r\n"
+						+ "   			},");
+				out.print("  error: function (Resl) {  \r\n"
+						+ "	   document.getElementById('alert').innerHTML='Check Network and Restart Exam';\r\n"
+						+ "		   console.log(Resl);\r\n"
+						+ "   }  \r\n"
+						+ "});\r\n"
+						+ "}\r\n"
+						+ "} ");
+				out.print(" var countMin = 60;\r\n"
+						+ "var Hours = 0;\r\n"
+						+ "var minutes = 320;\r\n"
+						+ "var seconds = 0;\r\n"
+						+ "if (minutes > 59) {\r\n"
+						+ "	Hours = Math.floor(minutes / 60);\r\n"
+						+ "	minutes = minutes % 60;\r\n"
+						+ "} ");
+				out.print("seconds = 0;\r\n"
+						+ "var timer_div= document.getElementById(\"timer_div\");\r\n"
+						+ "// Update the count down every 1 second\r\n"
+						+ "var x = setInterval(function() {\r\n"
+						+ "	if (seconds == 0) {\r\n"
+						+ "		if (minutes > 0) {\r\n"
+						+ "			minutes--;\r\n"
+						+ "			\r\n"
+						+ "			//Update time every one min\r\n"
+						+ "			UpdateRemainigTime(minutes+1);\r\n"
+						+ "			seconds = 59;\r\n"
+						+ "		} ");
+				out.print(" else if (minutes == 0 && Hours > 0) {\r\n"
+						+ "			Hours--;\r\n"
+						+ "			minutes = 59;\r\n"
+						+ "		} else {\r\n"
+						+ "			UpdateRemainigTime(0);\r\n"
+						+ "	        document.getElementById(\"Submit\").click();\r\n"
+						+ "			console.log(\"Time Is Over Auto Submited..\");\r\n"
+						+ "		}\r\n"
+						+ "	} ");
+				out.print(" else {\r\n"
+						+ "		seconds--;\r\n"
+						+ "	}\r\n"
+						+ "		if(seconds<10)\r\n"
+						+ "			seconds=\"0\"+seconds;\r\n"
+						+ "			if(minutes<10){\r\n"
+						+ "	 		minutes=\"0\"+parseInt(minutes);\r\n"
+						+ "		}			\r\n"
+						+ "		if(Hours<10){ \r\n"
+						+ "			Hours=\"0\"+parseInt(Hours);\r\n"
+						+ "			}\r\n"
+						+ "	 if (Hours > 0) {\r\n"
+						+ "		 timer_div.innerHTML = Hours + \"H : \" + minutes	+ \"M : \" + seconds + \"S \";\r\n"
+						+ "		 applyCSS(timer_div);\r\n"
+						+ "	} else {\r\n"
+						+ "		timer_div.innerHTML = minutes + \"M : \"	+ seconds + \"S \";\r\n"
+						+ "		applyCSS(timer_div);\r\n"
+						+ "	}\r\n"
+						+ "}, 1000);\r\n"+ " ");
+				out.print(" function applyCSS(timer_div){\r\n"
+						+ "	timer_div.style.fontsize=\"20px\";\r\n"
+						+ "	timer_div.style.color=\"red\";\r\n"
+						+ "	timer_div.style.fontweight=\"bold\";\r\n"
+						+ "	timer_div.style.width=\"270px\";\r\n"
+						+ "	timer_div.style.padding=\"5px\";\r\n"
+						+ "	timer_div.style.textAlign=\"center\";\r\n"
+						+ "	timer_div.style.border=\"3px solid LightGrey\";\r\n"
+						+ "	timer_div.style.float=\"right\";\r\n"
+						+ "	timer_div.style.height=\"50px\";\r\n"
+						+ "}  ");
+				out.print("  function preventBack() {\r\n"
+						+ "	window.history.forward();\r\n"
+						+ "}\r\n"
+						+ "setTimeout(\"preventBack()\", 0);\r\n"
+						+ "window.onunload = function() {\r\n"
+						+ "	null\r\n"
+						+ "};\r\n"
+						+ "\r\n"
+						+ "\r\n"
+						+ "</script>\r\n"
+						+ "</body>\r\n"
+						+ " </html>\r\n"
+						+ " ");
+				
+				
+				
+				
+				
+//=========================Updto========================
+		
+		ExamModal exm=new ExamModal();
+				
+		String action=request.getParameter("action");
+ 		if(action.equalsIgnoreCase("prev")) {
+ 			SN=Integer.valueOf(String.valueOf(session.getAttribute("SN")))-1;
+ 			if(SN<0|| SN==0)
+ 				SN=1;
+ 			
+ 			exm=exmdal.getQuesn(ExmEAID,ExmEID, ExmSID, ExmCLASSID,  ExmSUBID, SN);
+	}
+		if(action.equalsIgnoreCase("Submit")) {
+		System.out.print("Exam Submit Button Called Successfully....  "+action);
+		
+		
+		request.getRequestDispatcher("Students/Paper.jsp").include(request, response);
+		
+		session.invalidate();
+		out.print("You Are Successfully Logged Out... Exam Submitted Successfully Log in <a href='index.html'> Click Here </a> !!....");
+		out.print("<html>");
+		out.close();
+		}
+		
+		if(action.equalsIgnoreCase("updateAnswer")) {
+			int EAID=Integer.valueOf(request.getParameter("EAID"));
+			System.out.print("Remaiing Time Update"+EAID);
+		 	int SID=Integer.valueOf(request.getParameter("SID"));
+			int CLASSID=Integer.valueOf(request.getParameter("CLASSID"));
+			int QID=Integer.valueOf(request.getParameter("QID"));
+			
+			String ANSWER=(request.getParameter("ANSWER"));
+			int Sn=Integer.valueOf(request.getParameter("SN"));
+			ExamDal exmDal=new ExamDal();
+			exmDal.UpdateAnswer(EAID, CLASSID, SID,QID, Sn, ANSWER);
+			//------------------
+			String json = new Gson().toJson("Sucessfully Upadated Answer");			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+			System.out.println(json);
+		}
+		
+		if(action.equalsIgnoreCase("updateRemainigTime")) {
+			System.out.print("Remaiing Time Update");
+			int remainTime=Integer.valueOf(request.getParameter("RemainTime"));
+			System.out.print("Remaing Time"+remainTime);
+			int EAID=Integer.valueOf(request.getParameter("EAID"));
+			int SID=Integer.valueOf(request.getParameter("SID"));
+			int CLASSID=Integer.valueOf(request.getParameter("CLASSID"));
+			ExamDal exmDal=new ExamDal();
+			if(exmDal.UpdateRemainTime(EAID,remainTime,SID,CLASSID))
+				System.out.print("Remaiing Time Update Sucessfully");
+			//------------------
+			String json = new Gson().toJson("Sucessfully Upadated Time");			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+			System.out.println(json);
+			
+			//-------------------
+			//select q.QUESTION,q.a,q.b,q.c,q.d from QUESTIONPAPER q, STUDENTQUEANSWER S where q.QID=s.QID and q.CLASSID=s.CLASSID and q.SUBID=s.SUBID and s.eaid=1 and sid=4
+			//and s.sid=11 and classid=11;
+		}
+		
+		if(action.equalsIgnoreCase("gtfqnq")) {
+				
+			exmdal.getQuesn(ExmEAID,ExmEID, ExmSID, ExmCLASSID,  ExmSUBID, SN);
+			
+		}
+		
+		if(action.equalsIgnoreCase("Submit")) {
+			StuAtndExam stdexm=new StuAtndExam();
+			
+			
+			request.getRequestDispatcher("Students/Submitted.jsp").forward(request, response);
+		}
+		
+	 }
+}

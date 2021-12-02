@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: "Lato", sans-serif;}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
+}
+
+#London {background-color:red;}
+#Paris {background-color:green;}
+#Tokyo {background-color:#90EE90;}
+#Oslo {background-color:orange;}
+</style>
+</head>
+<body>
+
+
+<div id="London" class="tabcontent">
+  <h1>History</h1>
+  <h2> Our Name is SIMRANCOACHING.</h2>
+  <h3>we have started from 2002. it was very small setup with one teacher and 2/4 students.</h3>
+     <h3>And now its 2021 and now we have 125+ students and each subject teacher also.</h3>
+     <h3>Its all about 19 years journy.</h3>
+     <h3>today we have students with 1st to 12th std and well educated and experienced teachers.</h3>
+     <h3> We are taking f.y , s.y and t.y of B.com with subject account,economics,costing,etc. </h3> 
+     <h3> Our classroom is about 3 halls there,</h3> 
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h2>Our activities</h2>
+  <h3>Yes , we are continuously taking different activities for students which makes student confident.</h3>
+    <h3>The activities like speech competition,different games singing,dancing,drama competition,</h3> 
+     <h3>its very helpful to student to build their confidence and its also making change.</h3>
+     <h3>we are taking annual function, teachers day function and interaction programs for students.
+     <h3>monthly we are taking parents meeting also to aware them about their child.</h3>
+     <h3> we  are also taking the phonics sessions  in summer vacations</h3> 
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h1>Faculty</h1>
+  <h3> The faculty is about 8 teachers which are experienced and  post-graduated with respective stream. </h3>
+  <h3> the faculty member are ;</h3>
+  <h3> Aasma sheikh:   M.com  with 1st Rank</h3> 
+  <h3> Prachi mayekar: M.sc</h3> 
+  <h3> Pooja Chavan:  B.ed</h3>
+  <h3> Kaveri Kambale: M.com</h3>
+  <h3> Siddhi Katkar: B.com</h3>
+  <h3> Simran Sheikh: M.sc</h3> 
+  <h3> Yashashri Chafekar: MCA</h3>
+  <h3> Araju Khan: B.ed</h3>     
+  
+</div>
+
+<div id="Oslo" class="tabcontent">
+  <h1>score</h1>
+  <h3> we have </h3>
+  <p></p>
+</div>
+
+<button class="tablink" onclick="openCity('London', this, 'red')" id="defaultOpen">HISTORY</button>
+<button class="tablink" onclick="openCity('Paris', this, 'green')">OUR ACTIVITIES</button>
+<button class="tablink" onclick="openCity('Tokyo', this, 'blue')">FACULTY</button>
+<button class="tablink" onclick="openCity('Oslo', this, 'orange')">SCORE</button>
+
+<script>
+function openCity(cityName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(cityName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+   
+</body>
+</html> 
